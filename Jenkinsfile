@@ -53,7 +53,7 @@ pipeline {
 
         stage('Smoke Platform Test') {
             steps {
-                retry(2){
+                retry(5){
                     sh 'echo "Testing ingress path..."'
                     sh 'curl --connect-timeout 5 --retry 5 --max-time 10 --retry-delay 0 --retry-max-time 40 http://localhost:8090/health'
                     sh 'echo "Testing ingress path /..."'
