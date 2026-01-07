@@ -3,6 +3,11 @@ pipeline {
 
     environment {
         COMPOSE_PROJECT = 'shvirtd-example-python'
+        MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
+        MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')
+        MYSQL_HOST = 'mysql-db'
+        MYSQL_DATABASE = 'virtd'
+        MYSQL_USER = 'app'
     }
 
     stages {
