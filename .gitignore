@@ -1,1 +1,3 @@
 /haproxy/Dockerfile.txt
+/db_data/
+/.env
