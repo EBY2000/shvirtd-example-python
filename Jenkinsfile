@@ -21,7 +21,7 @@ pipeline {
 //                     '''
                 script {
                    def date = new Date()
-                   def data = "Hello World\nMYSQL_PASSWORD='$MYSQL_PASSWORD'\n" + date
+                   def data = "MYSQL_HOST='mysql-db'\nMYSQL_PASSWORD='$MYSQL_PASSWORD'\nMYSQL_DATABASE = 'virtd'\nMYSQL_USER = 'app'"
                    writeFile(file: 'zorg.txt', text: data)
                    sh "ls -l"
                }
