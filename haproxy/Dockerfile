@@ -23,15 +23,15 @@ LABEL Vendor HAProxy
 LABEL Version 2.6.23
 LABEL RUN /usr/bin/docker -d IMAGE
 
-ENV HAPROXY_BRANCH 2.6
-ENV HAPROXY_MINOR 2.6.23
-ENV HAPROXY_SHA256 1281d57f25e98456a042c81f32801a106a293c1340b0c06debb2a87d6a7b3611
-ENV HAPROXY_SRC_URL http://www.haproxy.org/download
+ENV HAPROXY_BRANCH=2.6
+ENV HAPROXY_MINOR=2.6.23
+ENV HAPROXY_SHA256=1281d57f25e98456a042c81f32801a106a293c1340b0c06debb2a87d6a7b3611
+ENV HAPROXY_SRC_URL=http://www.haproxy.org/download
 
-ENV HAPROXY_UID haproxy
-ENV HAPROXY_GID haproxy
+ENV HAPROXY_UID=haproxy
+ENV HAPROXY_GID=haproxy
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 COPY --from=builder /dataplaneapi /usr/local/bin/dataplaneapi
 COPY --from=builder /dataplaneapi-v2 /usr/local/bin/dataplaneapi-v2
