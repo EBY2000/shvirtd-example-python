@@ -73,6 +73,7 @@ RUN apt-get update && \
 
 COPY /reverse/haproxy.cfg /usr/local/etc/haproxy
 COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
 STOPSIGNAL SIGUSR1
 
