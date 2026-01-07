@@ -54,7 +54,7 @@ pipeline {
         stage('Smoke Platform Test') {
             steps {
                 sh 'echo "Testing ingress path..."'
-                sh 'curl -f http://127.0.0.1:8090/health'
+                sh 'curl -f http://localhost:8090/health'
             }
         }
 
