@@ -5,11 +5,11 @@ services:
         backend: 
             ipv4_address: 172.20.0.5
     
-#    environment:
-#      - DB_HOST=mysql_db
-#      - DB_PASSWORD=${MYSQL_PASSWORD}
-#      - DB_USER=${MYSQL_USER}
-#      - DB_NAME=${MYSQL_DATABASE}
+    environment:
+      - DB_HOST=mysql_db
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_USER=${MYSQL_USER}
+      - DB_NAME=${MYSQL_DATABASE}
     depends_on:
        mysql_db:
           condition: service_healthy
