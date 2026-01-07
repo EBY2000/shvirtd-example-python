@@ -67,6 +67,8 @@ pipeline {
     post {
         always {
             sh 'docker compose down -v || true'
+            sh 'docker rmi platform-fastapi:${BUILD_ID}'
+            sh 'docker rmi platform-haproxy:${BUILD_ID}'
         }
     }
 }
