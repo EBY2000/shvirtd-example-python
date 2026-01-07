@@ -1,0 +1,80 @@
+services:
+  fastapi:
+    build: .
+    networks:
+        backend: 
+            ipv4_address: 172.20.0.5
+    
+    environment:
+      - DB_HOST=mysql_db
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_USER=${MYSQL_USER}
+      - DB_NAME=${MYSQL_DATABASE}
+    depends_on:
+       mysql_db:
+          condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost:5000/health || exit 1
+      interval: 2s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+  
+  mysql_db:
+    image: mysql
+    restart: always
+    hostname: mysql-db
+    networks:
+        backend: {}
+    env_file:
+      - .env
+    volumes:
+      - ./db_data:/var/lib/mysql # Сохранение данных базы вне контейнера
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Если нужно выполнить SQL-скрипты при старте (опционально)
+
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+  
+  reverse-proxy:
+    build: /haproxy/.
+   # image: haproxy:2.4
+    restart: always
+    networks:
+        frontend: 
+            ipv4_address: 172.21.0.3
+        backend: {}
+    depends_on:
+       fastapi:
+          condition: service_healthy
+ 
+
+  ingress-proxy:
+    image: nginx:latest
+    restart: always
+    networks:
+        
+        frontend: 
+            ipv4_address: 172.21.0.5
+    ports:
+      - "8090:8090"
+    volumes:
+    - ./nginx/ingress/default.conf:/etc/nginx/conf.d/default.conf:rw
+    - ./nginx/ingress/nginx.conf:/etc/nginx/nginx.conf:rw
+
+networks:
+  backend:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.20.0.0/24
+  
+  frontend:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.21.0.0/24
+

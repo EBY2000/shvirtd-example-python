@@ -141,7 +141,9 @@ def get_requests():
     except mysql.connector.Error as err:
         return {"error": f"Ошибка при чтении из базы данных: {err}"}
 
-
+@app.api_route("/health", methods=["GET", "HEAD"])
+def get_health_status():
+    return { "status": "ok" }
 # --- 7. Запуск приложения ---
 # Для запуска этого файла используется ASGI-сервер, например, uvicorn.
 # Команда: uvicorn main:app --reload
