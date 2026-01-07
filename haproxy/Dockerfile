@@ -21,7 +21,7 @@ LABEL Name='HAProxy'
 LABEL Release='Community Edition'
 LABEL Vendor='HAProxy'
 LABEL Version=2.6.23
-LABEL 'RUN /usr/bin/docker -d IMAGE'
+LABEL Start='/usr/bin/docker -d IMAGE'
 
 ENV HAPROXY_BRANCH=2.6
 ENV HAPROXY_MINOR=2.6.23
