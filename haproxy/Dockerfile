@@ -17,9 +17,9 @@ FROM debian:bookworm-slim
 
 MAINTAINER Dinko Korunic <dkorunic@haproxy.com>
 
-LABEL Name=HAProxy
-LABEL Release=Community Edition
-LABEL Vendor=HAProxy
+LABEL Name='HAProxy'
+LABEL Release='Community Edition'
+LABEL Vendor='HAProxy'
 LABEL Version=2.6.23
 LABEL 'RUN /usr/bin/docker -d IMAGE'
 
