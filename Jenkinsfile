@@ -14,7 +14,7 @@ pipeline {
         stage("Set environment variables") {
             steps {
                 writeFile file: '.env', text: '''
-                    MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}\n
+                    MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD\n
                     MYSQL_PASSWORD=''\n
                     MYSQL_HOST=''\n
 
