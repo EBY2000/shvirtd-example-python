@@ -55,6 +55,8 @@ pipeline {
             steps {
                 sh 'echo "Testing ingress path..."'
                 sh 'curl -I http://localhost:8090/health'
+                sh 'echo "Testing ingress path /..."'
+                sh 'curl -I http://localhost:8090'
             }
         }
 
