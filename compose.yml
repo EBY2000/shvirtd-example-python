@@ -40,7 +40,7 @@ services:
       start_period: 60s
   
   reverse-proxy:
-    build: /haproxy/.
+    build: ./haproxy/
    # image: haproxy:2.4
     restart: always
     networks:
