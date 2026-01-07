@@ -1,8 +1,8 @@
 FROM golang:alpine AS builder
 
-ENV DATAPLANE_MINOR=3.2.7
-ENV DATAPLANE_V2_MINOR=2.9.20
-ENV DATAPLANE_UR='https://github.com/haproxytech/dataplaneapi.git'
+ENV DATAPLANE_MINOR 3.2.7
+ENV DATAPLANE_V2_MINOR 2.9.20
+ENV DATAPLANE_URL https://github.com/haproxytech/dataplaneapi.git
 
 RUN apk add --no-cache ca-certificates git make && \
     git clone "${DATAPLANE_URL}" "${GOPATH}/src/github.com/haproxytech/dataplaneapi" && \
@@ -17,21 +17,21 @@ FROM debian:bookworm-slim
 
 MAINTAINER Dinko Korunic <dkorunic@haproxy.com>
 
-LABEL Name='HAProxy'
-LABEL Release='Community Edition'
-LABEL Vendor='HAProxy'
-LABEL Version=2.6.23
-LABEL Start='/usr/bin/docker -d IMAGE'
+LABEL Name HAProxy
+LABEL Release Community Edition
+LABEL Vendor HAProxy
+LABEL Version 2.6.23
+LABEL RUN /usr/bin/docker -d IMAGE
 
 ENV HAPROXY_BRANCH=2.6
 ENV HAPROXY_MINOR=2.6.23
 ENV HAPROXY_SHA256=1281d57f25e98456a042c81f32801a106a293c1340b0c06debb2a87d6a7b3611
-ENV HAPROXY_SRC_URL='http://www.haproxy.org/download'
+ENV HAPROXY_SRC_URL=http://www.haproxy.org/download
 
-ENV HAPROXY_UID=haproxy
-ENV HAPROXY_GID=haproxy
+ENV HAPROXY_UID haproxy
+ENV HAPROXY_GID haproxy
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
 COPY --from=builder /dataplaneapi /usr/local/bin/dataplaneapi
 COPY --from=builder /dataplaneapi-v2 /usr/local/bin/dataplaneapi-v2
