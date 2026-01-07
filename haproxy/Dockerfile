@@ -1,8 +1,8 @@
 FROM golang:alpine AS builder
 
-ENV DATAPLANE_MINOR 3.2.7
-ENV DATAPLANE_V2_MINOR 2.9.20
-ENV DATAPLANE_URL https://github.com/haproxytech/dataplaneapi.git
+ENV DATAPLANE_MINOR=3.2.7
+ENV DATAPLANE_V2_MINOR=2.9.20
+ENV DATAPLANE_UR=https://github.com/haproxytech/dataplaneapi.git
 
 RUN apk add --no-cache ca-certificates git make && \
     git clone "${DATAPLANE_URL}" "${GOPATH}/src/github.com/haproxytech/dataplaneapi" && \
@@ -17,11 +17,11 @@ FROM debian:bookworm-slim
 
 MAINTAINER Dinko Korunic <dkorunic@haproxy.com>
 
-LABEL Name HAProxy
-LABEL Release Community Edition
-LABEL Vendor HAProxy
-LABEL Version 2.6.23
-LABEL RUN /usr/bin/docker -d IMAGE
+LABEL Name=HAProxy
+LABEL Release=Community Edition
+LABEL Vendor=HAProxy
+LABEL Version=2.6.23
+LABEL 'RUN /usr/bin/docker -d IMAGE'
 
 ENV HAPROXY_BRANCH=2.6
 ENV HAPROXY_MINOR=2.6.23
