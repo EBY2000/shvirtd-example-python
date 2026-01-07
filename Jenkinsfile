@@ -60,9 +60,9 @@ pipeline {
 
     }
 
-    post {
-        always {
-            sh 'docker compose down -v || true'
-        }
-    }
+//     post {
+//         always {
+//             sh 'docker compose down -v || true'
+//         }
+//     }
 }
