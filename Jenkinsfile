@@ -54,7 +54,7 @@ pipeline {
         stage('Smoke Platform Test') {
             steps {
                 sh 'echo "Testing ingress path..."'
-                sh 'curl -I http://localhost:8090/health'
+                sh 'curl -I --connect-timeout 5 --retry 5 --max-time 10 --retry-delay 0 http://localhost:8090/health'
                 sh 'echo "Testing ingress path /..."'
                 sh 'curl -I http://localhost:8090'
             }
